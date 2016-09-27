@@ -9,9 +9,12 @@ set(${PROJECT_NAME}_source
     )
 
 add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_source})
+
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${Boost_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} A)
 
 add_test(NAME ${PROJECT_NAME}-Tests COMMAND ${PROJECT_NAME})

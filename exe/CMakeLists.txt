@@ -11,13 +11,14 @@ set(Boost_USE_STATIC_LIBS TRUE)
 find_package(Boost 1.61 REQUIRED
     COMPONENTS program_options)
 
-include_directories(${BOOST_INCLUDE_DIRS} )
+set(${PROJECT_NAME}_sources main.cpp)
 
-set(example_sources main.cpp)
-
-add_executable(${PROJECT_NAME} ${example_sources})
+add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 
-target_link_libraries(example ${Boost_LIBRARIES} A)
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${Boost_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} A)

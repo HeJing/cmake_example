@@ -8,7 +8,7 @@ set(PROJECT_NAME A)
 project(${PROJECT_NAME})
 
 find_package(Boost REQUIRED)
-find_library(OPEN_CL OpenCL)
+find_package(OpenCL REQUIRED)
 
 set(${PROJECT_NAME}_sources src/impl.cpp)
 
@@ -22,7 +22,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     $<INSTALL_INTERFACE:include>
     PRIVATE src ${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} ${OPEN_CL} )
+target_link_libraries(${PROJECT_NAME} ${OpenCL_LIBRARIES} )
 
 # Installing phase
 install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-Config
