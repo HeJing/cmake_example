@@ -24,7 +24,7 @@ SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
     "Single Directory for all"
     )
 
-OPTION (BUILD_SHARED_LIBS "we whank" ON)
+OPTION (BUILD_SHARED_LIBS "shared" ON)
 
 enable_testing()
 

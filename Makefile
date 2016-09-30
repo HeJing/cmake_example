@@ -25,8 +25,8 @@ all: ./$(BUILD_DIR)/Makefile
 clean:
 	@ $(MAKE) -C $(BUILD_DIR) clean
 
-do_bench:
-	@  (cd $(BUILD_DIR) > /dev/null && ctest -L bench --verbose)
+do_perf:
+	@  (cd $(BUILD_DIR) > /dev/null && ctest -L perf --verbose)
 
 do_test:
 	@  (cd $(BUILD_DIR) > /dev/null && ctest -L unit --verbose)
