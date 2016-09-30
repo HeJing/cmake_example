@@ -8,11 +8,10 @@ set(PROJECT_NAME A)
 project(${PROJECT_NAME})
 
 find_package(Boost REQUIRED)
-find_package(OpenCL REQUIRED)
 
 set(${PROJECT_NAME}_sources src/impl.cpp)
 
-add_library(${PROJECT_NAME} SHARED ${${PROJECT_NAME}_sources})
+add_library(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
@@ -22,10 +21,8 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     $<INSTALL_INTERFACE:include>
     PRIVATE src ${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${PROJECT_NAME} ${OpenCL_LIBRARIES} )
-
 # Installing phase
-install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}-Config
+install(TARGETS ${PROJECT_NAME}
     ARCHIVE  DESTINATION lib
     LIBRARY  DESTINATION lib
     RUNTIME  DESTINATION bin)
