@@ -22,3 +22,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${Boost_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME} ${Boost_LIBRARIES} A)
+
+install(TARGETS ${PROJECT_NAME}
+    ARCHIVE  DESTINATION lib
+    LIBRARY  DESTINATION lib
+    RUNTIME  DESTINATION bin)

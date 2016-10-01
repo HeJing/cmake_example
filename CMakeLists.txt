@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.4)
+cmake_minimum_required(VERSION 3.6)
 
 if ( ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR} )
     message( FATAL_ERROR "In-source builds not allowed. Please make a new directory and run CMake from there. You may need to remove CMakeCache.txt." )
@@ -30,3 +30,9 @@ enable_testing()
 
 add_subdirectory( exe )
 add_subdirectory( libA )
+
+set(CPACK_PACKAGE_NAME "TheExample")
+set(CPACK_PACKAGE_VERSION "1.0.2")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY "CPack Component Example")
+
+include(CPack)

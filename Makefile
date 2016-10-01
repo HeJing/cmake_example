@@ -31,6 +31,9 @@ do_perf:
 do_test:
 	@  (cd $(BUILD_DIR) > /dev/null && ctest -L unit --verbose)
 
+do_pack:
+	@ (cd $(BUILD_DIR) > /dev/null && cpack -G TGZ)
+
 distclean:
 	@  ($(MKDIR) $(BUILD_DIR) > /dev/null)
 	@  (cd $(BUILD_DIR) > /dev/null 2>&1 && cmake .. > /dev/null 2>&1)
