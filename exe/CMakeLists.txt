@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.5)
 
 if ( ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR} )
     message( FATAL_ERROR "In-source builds not allowed. Please make a new directory and run CMake from there. You may need to remove CMakeCache.txt." )
@@ -8,7 +8,7 @@ set(PROJECT_NAME example)
 project(${PROJECT_NAME})
 
 set(Boost_USE_STATIC_LIBS TRUE)
-find_package(Boost 1.61 REQUIRED
+find_package(Boost REQUIRED
     COMPONENTS program_options)
 
 set(${PROJECT_NAME}_sources main.cpp)
