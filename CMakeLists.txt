@@ -24,7 +24,8 @@ SET (CMAKE_ARCHIVE_OUTPUT_DIRECTORY
     "Single Directory for all"
     )
 
-OPTION (BUILD_SHARED_LIBS "shared" ON)
+option(BUILD_SHARED_LIBS "shared" ON)
+set(Boost_USE_STATIC_LIBS ON)
 
 enable_testing()
 
