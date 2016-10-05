@@ -9,7 +9,7 @@ class DoTestFixture : public ::hayai::Fixture
 public:
     virtual void SetUp()
     {
-        m_data = std::move( gen_buffer<int>( 1024 * 1024 ) );
+        m_data = gen_buffer<int>( 1024 * 1024 );
     }
     std::vector<int> m_data;
 };
