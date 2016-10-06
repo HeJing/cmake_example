@@ -84,6 +84,11 @@ layout: false
 git clone --recursive https://github.com/astavonin/cmake_example
 ```
 
+- if you forgot about `--recursive` flag:
+
+```bash
+git submodule update --init --recursive
+```
 
 ---
 
@@ -140,7 +145,7 @@ git clone --recursive https://github.com/astavonin/cmake_example
         * Eclipse CDT4;
         * etc.
 
-- IDE support (Demo);
+- IDE support (Demo).
 
 - Integration with test frameworks and installers.
 
@@ -150,16 +155,17 @@ git clone --recursive https://github.com/astavonin/cmake_example
 ```txt
 .
 ├── CMakeLists.txt
+├── build.bat
 ├── Makefile
 ├── exe
-│   ├── CMakeLists.txt
-│   └── main.cpp
+│├── CMakeLists.txt
+│└── main.cpp
 └── libA
     ├── CMakeLists.txt
     ├── include
-    │   └── libA.h
+    │└── libA.h
     ├── src
-    │   └── impl.cpp
+    │└── impl.cpp
     └── test
         ├── CMakeLists.txt
         ├── base_tests.cpp
@@ -168,7 +174,7 @@ git clone --recursive https://github.com/astavonin/cmake_example
 ```
 ---
 
-# How to compile with CMake?
+# How to execute CMake build?
 
 - Run CMake from command line directly:
 ```bash
@@ -181,7 +187,7 @@ cd $(BUILD_DIR) && cmake -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) ..
 - _HINT: Do not run CMake in root project directory!_
 
 - Or create a runner!
-    + Makefile on Bash/Bat files based.
+    + Makefile or Bash/Bat files based.
 ```sh
 make
 make do_test
@@ -199,7 +205,7 @@ make install
 cmake_minimum_required(VERSION 3.6)
 ```
 
-- Protect your project against in-source builds;
+- Protect your project against in-source builds:
 
 ```cmake
 if ( ${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR} )
@@ -211,7 +217,6 @@ endif()
 
         - CMAKE_SOURCE_DIR – the directory which contains the top-level CMakeLists.txt
         - CMAKE_BINARY_DIR – the top level directory of your build tree
-
 - Set the project name:
 
 ```cmake
@@ -235,7 +240,6 @@ find_library(cURL)
     - In case of success (Boost_FOUND equal TRUE):
         - Boost_LIBRARIES == Boost component libraries to be linked with your application;
         - Boost_INCLUDE_DIRS == Boost include directories.
-
 - Add compilation targets:
 
 ```cmake
@@ -249,7 +253,7 @@ add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 ```
 
 ---
-# How CMakeLists.txt should looks like? (III)
+# How CMakeLists.txt should look like? (III)
 
 - Setup properties and includes paths:
 
@@ -312,7 +316,7 @@ add_test(NAME ${PROJECT_NAME}-Tests COMMAND ${PROJECT_NAME})
 set_property(TEST ${PROJECT_NAME}-Tests PROPERTY LABELS "unit")
 ```
 
-        - alway assign label for your tests modules.
+        - always assign label for your tests modules.
 
 - Use CTest for tests execution:
 
@@ -399,9 +403,9 @@ do_test:
 
 # Installers and CPack
 
-- CPack uses information from `install(...)` commands for package creation;
+- CPack uses information from `install(...)` commands for package creation.
 
-- Installer functional is very limited and is useful almost only for self-contained archive based packages;
+- Installer functional is very limited and is useful almost only for self-contained archive based packages.
 
 - Initialize CPack variables at the end of your CMake script:
 
@@ -422,21 +426,21 @@ cpack -G TGZ
 ---
 # Recommendations :: Basics
 
-- Alway use the latest available CMake;
+- Always use the latest available CMake:
 
 ```cmake
 cmake_minimum_required(VERSION 3.6)
 ```
 
-- Know CMake project generators;
+- Know CMake project generators:
 
 ```bash
 cmake --help
 ```
 
-- Learn CTest features, it may be used for integration with continuous integration systems like Jenkins;
+- Learn CTest features, it may be used for integration with CI systems like Jenkins.
 
-- Use CPack for distributing simple projects;
+- Use CPack for distributing simple projects.
 
 ---
 
@@ -469,7 +473,7 @@ link_libraries(${Boost_INCLUDE_DIRS})
 
 # Recommendations :: C++ standards
 
-- Ask CMake to define compiler flags for required standard
+- Ask CMake to define compiler flags for required standard:
 
 ```cmake
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 14)
@@ -491,16 +495,16 @@ target_compile_features(${PROJECT_NAME} PRIVATE cxx_range_for)
 ---
 # Recommendations :: Library development
 
-- Do not specify a library type explicitly
+- Do not specify a library type explicitly:
 
 ```cmake
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_sources})
 ```
 
-- Allow library customer to set expected build type
+- Allow library customer to set expected build type:
 
 ```cmake
-option(BUILD_SHARED_LIBS "shared" ON)
+option(BUILD_SHARED_LIBS "some description" ON)
 ```
 
 ---
@@ -508,9 +512,17 @@ option(BUILD_SHARED_LIBS "shared" ON)
 
 Two most common and the worst errors with CMake:
 
-- Self-made functions instead of standard implementation;
+- Self-made functions instead of standard implementation:
+  + own `add_my_project_only_library(...), add_my_project_only_executable(...)` implementations;
+
+  + `my_cool_search_for_lib(...)` instead of `find_package(...)`, `find_library(...)`.
 
 - CMake functions reimplementation with Bash/BAT scripts.
+
+---
+class: center, middle, inverse
+
+#Questions?
 
     </textarea>
 <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
